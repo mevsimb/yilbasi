@@ -43,23 +43,7 @@
         height: 100px;
         z-index: 10;
     }
-    #celebration-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 100px;
-    font-weight: bold;
-    color: #ffcc00;
-    text-align: center;
-    opacity: 0;
-    z-index: 9999;
-  transition: opacity 1s ;  /* Fade-out efekti ekledik */
-}
-
-.hidden {
-    display: none;
-}
+  
 </style>
 <body>
     <section class="sub-header">
@@ -104,21 +88,25 @@
             const animationDiv = document.getElementById('celebration-animation');
             const celebrationText = document.getElementById('celebration-text');
 
-            if (animationDiv && celebrationText) {
+            if (animationDiv) {
                 // Yıldız animasyonu
-                party.sparkles(animationDiv, {
-                    count: 100,
-                    spread: 70,
-                    size: 1.5,
-                    lifetime: 2,
-                });
+               party.sparkles(animationDiv, {
+            count: 100,
+            spread: 70,
+            size: 1.5,
+            lifetime: 2,
+        });
 
-                // "Mutlu Yıllar!" yazısının kaybolmasını sağlamak için
-                setTimeout(() => {
-                    celebrationText.style.opacity = '0';  // Yazıyı kaybettir
-                }, 3000);  // 3 saniye sonra yazıyı kaybet
+        // Konfeti animasyonu
+        party.confetti(animationDiv, {
+            count: 100,
+            spread: 70,
+            size: 2,
+            lifetime: 4
+        });
+
             } else {
-                console.error('Animation div veya text bulunamadı.');
+                console.error('Animation div  bulunamadı.');
             }
 
             // "Sen de bir kart hazırla" butonu
