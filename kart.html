@@ -87,7 +87,14 @@
             const from = urlParams.get('from') || "From"; // Varsayılan değer
             const to = urlParams.get('to') || "To";
             const message = urlParams.get('message') || "Message";
+            <script>
 
+    // Kart üzerindeki metinleri güncelleme
+    document.getElementById('fromText').innerText = decodeURIComponent(from);
+    document.getElementById('toText').innerText = decodeURIComponent(to);
+    document.getElementById('messageText').innerText = decodeURIComponent(message);
+</script>
+<script>
             document.getElementById('createShareLink').addEventListener('click', () => {
     // Kart üzerindeki "From", "To" ve "Message" metinlerini alıp encode ediyoruz
     const from = encodeURIComponent(document.getElementById('fromText').innerText.replace("From: ", "").trim());
