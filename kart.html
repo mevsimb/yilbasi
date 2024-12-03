@@ -75,30 +75,28 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+<script>
+   // URL'den parametreleri çekme
+const urlParams = new URLSearchParams(window.location.search);
+const from = urlParams.get('from') || "From"; // Varsayılan değer
+const to = urlParams.get('to') || "To";
+const message = urlParams.get('message') || "Message";
 
-    <script>
-        // URL'den parametreleri çekme
-        const urlParams = new URLSearchParams(window.location.search);
-        const from = urlParams.get('from') || "From"; // Varsayılan değer
-        const to = urlParams.get('to') || "To";
-        const message = urlParams.get('message') || "Message";
+// Kart üzerindeki metinleri güncelleme
+document.getElementById('fromText').innerText = decodeURIComponent(from);
+document.getElementById('toText').innerText = decodeURIComponent(to);
+document.getElementById('messageText').innerText = decodeURIComponent(message);
 
-        // Kart üzerindeki metinleri güncelleme
-        document.getElementById('fromText').innerText = decodeURIComponent(from);
-        document.getElementById('toText').innerText = decodeURIComponent(to);
-        document.getElementById('messageText').innerText = decodeURIComponent(message);
-
-        // Link oluşturma ve paylaşma
-    document.getElementById('createShareLink').addEventListener('click', () => {
+// Link oluşturma ve paylaşma
+document.getElementById('createShareLink').addEventListener('click', () => {
     // Kart üzerindeki metinleri alıp encode ediyoruz
     const from = encodeURIComponent(document.getElementById('fromText').innerText.replace("From: ", "").trim());
     const to = encodeURIComponent(document.getElementById('toText').innerText.replace("To: ", "").trim());
     const message = encodeURIComponent(document.getElementById('messageText').innerText.replace("Message: ", "").trim());
 
     // Linki oluşturalım
-  const shareURL = `https://mevsimb.github.io/yilbasi/goster.html?from=${from}&to=${to}&message=${message}`;
-console.log("Generated URL:", shareURL);
-window.location.href = shareURL;
+    const shareURL = `https://mevsimb.github.io/yilbasi/goster.html?from=${from}&to=${to}&message=${message}`;
+    console.log("Generated URL:", shareURL);
 
     // Linki kullanıcıya gösterelim
     const linkContainer = document.createElement('div');
@@ -119,6 +117,7 @@ function copyToClipboard(text) {
     document.body.removeChild(tempInput);
     alert("Link copied to clipboard!");
 }
+
     </script>
 
     <section class="footer">
