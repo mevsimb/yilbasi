@@ -43,6 +43,22 @@
         height: 100px;
         z-index: 10;
     }
+    #celebration-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 100px;
+    font-weight: bold;
+    color: #ffcc00;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.hidden {
+    display: none;
+}
 </style>
 <body>
     <section class="sub-header">
@@ -64,6 +80,7 @@
     </section>
 
     <div id="celebration-animation"></div>
+    <div id="celebration-text" class="hidden">Mutlu Yıllar!</div>
     <div class="card-preview" id="cardPreview">
         <img src="projegorsel/tasari1.png" alt="Card Preview">
         <div class="text-overlay from1" id="fromText"></div>
@@ -83,17 +100,26 @@
             document.getElementById("messageText").innerText = params.get("message");
 
             // Kutlama animasyonu
-            const animationDiv = document.getElementById('celebration-animation');
-            if (animationDiv) {
-                party.sparkles(animationDiv, {
-                    count: 100,
-                    spread: 70,
-                    size: 1.5,
-                    lifetime: 2,
-                });
-            } else {
-                console.error('Animation div bulunamadı.');
-            }
+           // Kutlama animasyonu
+const animationDiv = document.getElementById('celebration-animation');
+const celebrationText = document.getElementById('celebration-text');
+
+if (animationDiv) {
+    party.sparkles(animationDiv, {
+        count: 100,
+        spread: 70,
+        size: 1.5,
+        lifetime: 2,
+    });
+
+    // Mutlu Yıllar yazısını ekranda göstermek
+    celebrationText.classList.remove('hidden');
+    setTimeout(() => {
+        celebrationText.style.opacity = 1;  // Yazının görünür olmasını sağla
+    }, 500); // Animasyonla yazının belirme süresi
+} else {
+    console.error('Animation div bulunamadı.');
+}
         };
 
         // "Sen de bir kart hazırla" butonu
