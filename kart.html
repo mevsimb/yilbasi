@@ -76,11 +76,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
 <script>
-   // URL'den parametreleri çekme
+// URL'den parametreleri çekme
 const urlParams = new URLSearchParams(window.location.search);
 const from = urlParams.get('from') || "From"; // Varsayılan değer
 const to = urlParams.get('to') || "To";
-const message = urlParams.get('message') || "Message";
+const message = urlParams.get('message') || "Senin İçin Bir Mesajım Var"; // Varsayılan mesaj
 
 // Kart üzerindeki metinleri güncelleme
 document.getElementById('fromText').innerText = decodeURIComponent(from);
@@ -101,7 +101,7 @@ document.getElementById('createShareLink').addEventListener('click', () => {
     // Linki kullanıcıya gösterelim
     const linkContainer = document.createElement('div');
     linkContainer.innerHTML = `
-        <p>Your shareable link: <a href="${shareURL}" target="_blank">${shareURL}</a></p>
+        <p>Your shareable link: <span style="color: black;">${shareURL}</span></p>
         <button onclick="copyToClipboard('${shareURL}')">Copy Link</button>
     `;
     document.body.appendChild(linkContainer); // Yeni oluşturulan bağlantıyı ekliyoruz
@@ -117,6 +117,7 @@ function copyToClipboard(text) {
     document.body.removeChild(tempInput);
     alert("Link copied to clipboard!");
 }
+
 
     </script>
 
