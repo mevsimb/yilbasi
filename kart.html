@@ -96,8 +96,10 @@
     const message = encodeURIComponent(document.getElementById('messageText').innerText.replace("Message: ", "").trim());
 
     // Linki oluşturalım
-    const shareURL = `${window.location.origin}/goster.html?from=${from}&to=${to}&message=${message}`;
-    
+  const shareURL = `https://mevsimb.github.io/yilbasi/goster.html?from=${from}&to=${to}&message=${message}`;
+console.log("Generated URL:", shareURL);
+window.location.href = shareURL;
+
     // Linki kullanıcıya gösterelim
     const linkContainer = document.createElement('div');
     linkContainer.innerHTML = `
