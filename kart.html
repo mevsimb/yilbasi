@@ -37,12 +37,29 @@
         color: black;
         transform: translateY(-5px);
     }
+/* Kart Alanı */
+#cardPreview {
+    position: relative;
+    top: 100px;
+    width: 300px; /* Kartın genişliğini sabit tutun */
+    height: 400px; /* Kartın yüksekliğini sabit tutun */
+    margin: 0 auto; /* Kartı ortalayın */
+    background-color: white; /* Arka plan rengi */
+    border: 2px solid #ccc; /* Çerçeve */
+    border-radius: 15px; /* Yuvarlatılmış köşeler */
+    overflow: hidden; /* Taşmaları engelleyin */
+}
 
-    #cardPreview {
-        top: 100px;
-        position: relative;
-    }
-    .share-container {
+/* Kartın içindeki yazılar */
+#cardPreview .text {
+    position: absolute;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    word-wrap: break-word; /* Uzun metinleri kır */
+}
+
+/* Link Alanı */
+.share-container {
     margin-top: 70px;
     text-align: center;
     font-family: Arial, sans-serif;
@@ -53,25 +70,47 @@
     padding: 10px 20px;
     background-color: #f0f0f0;
     border: 1px solid #ccc;
-    border-radius: 10px; /* Köşeleri yuvarlama */
+    border-radius: 10px;
     font-size: 14px;
     color: #333;
     margin-bottom: 10px;
-    word-break: break-word; /* Uzun linkler taşmasın diye */
+    word-break: break-word;
 }
-    .copy-button{
-        background-color: #45171d;
-        padding: 5px 20px;
-        border-radius: 20px;
-        color: palegoldenrod;
-        margin-top: 200px;
-        font-size: 20px;}
-       .copy-button:hover {
-        background-color: #acc6aa;
-        transition: 0.5s;
-        color: black;
-        transform: translateY(-5px);
-    }
+
+/* Copy Link Butonu */
+.copy-button {
+    background-color: #45171d;
+    padding: 5px 20px;
+    border-radius: 20px;
+    color: palegoldenrod;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.copy-button:hover {
+    background-color: #acc6aa;
+    transition: 0.5s;
+    color: black;
+    transform: translateY(-5px);
+}
+
+/* "Link Oluştur" Butonu */
+#createShareLink {
+    background-color: #45171d;
+    padding: 5px 20px;
+    border-radius: 20px;
+    color: palegoldenrod;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+#createShareLink:hover {
+    background-color: #acc6aa;
+    transition: 0.5s;
+    color: black;
+    transform: translateY(-5px);
+}
+
 </style>
 
 <body>
@@ -132,7 +171,7 @@ document.getElementById('createShareLink').addEventListener('click', () => {
     const linkContainer = document.createElement('div');
    linkContainer.className = "share-container"; // Stil için class ekleniyor
     linkContainer.innerHTML = `
-        <p>Your shareable link:</p>
+       
         <div class="rounded-box">${shareURL}</div>
         <button  class="copy-button" onclick="copyToClipboard('${shareURL}')">Copy Link</button>
     `;
