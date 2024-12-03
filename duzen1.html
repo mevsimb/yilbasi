@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kart1Yazi</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-o6JveqHBwOv5aj4fGJ9cODq6mp3f1pXwhfgb6pQXrtdFUlJ8/J9nsC2EfwTctFfQMGtSL8hzk79I1GDSIibLaA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <section class="sub-header">
+        <a href="yilbasi.html"><p class="logo">Joy</p></a>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+
+        </div>
+        <div id="timer">
+            <div><span id="days"></span></div>
+            <div><span id="hours"></span></div>
+            <div><span id="minutes"></span></div>
+            <div><span id="seconds"></span></div>
+        </div>
+    </section>
+    <script src="https://app.embed.im/snow.js" defer></script>
+    </script>
+   
+    <div class="container">
+        <div class="card-preview">
+            <img src="projegorsel/tasari1.png" alt="Card Preview">
+            <div class="text-overlay from" id="fromText">From </div>
+            <div class="text-overlay to" id="toText">To </div>
+            <div class="text-overlay message" id="messageText">Message </div>
+        </div>
+        <div class="form-section">
+            <label for="fromInput">From</label>
+            <input type="text" id="fromInput" placeholder="Enter sender's name">
+
+            <label for="toInput">To</label>
+            <input type="text" id="toInput" placeholder="Enter recipient's name">
+
+            <label for="messageInput">Message</label>
+            <textarea id="messageInput" placeholder="Enter your message"></textarea>
+        </div>
+        
+        <button id="btn">Get Link</button>
+        <div id="link"></div>
+    </div>
+    <section class="footer">
+       
+        <p>Made with <i class="fa fa-heart-o"></i> by Mevsim Bahar </p>
+    </section>
+    <script>
+        var button = document.getElementById("btn");
+
+        button.onclick = e => {
+            e.preventDefault();
+
+            var from = encodeURIComponent(document.getElementById("fromInput").value);
+            var to = encodeURIComponent(document.getElementById("toInput").value);
+            var message = encodeURIComponent(document.getElementById("messageInput").value);
+
+            // URL'yi oluşturma
+            let url = `kart.html?from=${from}&to=${to}&message=${message}`;
+                
+            // URL'yi bağlantı olarak gösterme
+             window.open(url, '_blank');
+        }
+    </script>
+    <script>
+        // Form alanlarını al
+        const fromInput = document.getElementById('fromInput'); 
+        const toInput = document.getElementById('toInput');
+        const messageInput = document.getElementById('messageInput');
+
+        // Kart üzerindeki metinleri al
+        const fromText = document.getElementById('fromText');
+        const toText = document.getElementById('toText');
+        const messageText = document.getElementById('messageText');
+
+
+    </script>
+     <script>// Yılbaşı tarihini belirleme
+        const newYear = new Date("Jan 1, 2025 00:00:00").getTime();
+    
+        // Geri sayımı güncelleyen fonksiyon
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = newYear - now;
+    
+            // Gün, saat, dakika ve saniye hesaplama
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    
+            // HTML elementlerini güncelleme
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+        }
+    
+        // Her saniye güncelleme
+        setInterval(updateCountdown, 1000);</script>
+</body>
+</html>

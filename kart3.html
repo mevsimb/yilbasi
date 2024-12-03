@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-o6JveqHBwOv5aj4fGJ9cODq6mp3f1pXwhfgb6pQXrtdFUlJ8/J9nsC2EfwTctFfQMGtSL8hzk79I1GDSIibLaA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <section class="sub-header">
+        <a href="yilbasi.html">
+            <p class="logo">Joy</p>
+        </a>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+
+        </div>
+        <div id="timer">
+            <div><span id="days"></span></div>
+            <div><span id="hours"></span></div>
+            <div><span id="minutes"></span></div>
+            <div><span id="seconds"></span></div>
+        </div>
+    </section>
+
+    <body>
+        <!-- Kart önizleme alanı -->
+        <div class="card-preview" id="cardPreview">
+            <img src="projegorsel/tasari3.png" alt="Card Preview">
+
+            <div class="text-overlay message3cikti" id="messageText">
+                Message: </div>
+            <div class="text-overlay from3cikti" id="fromText" >From:
+            </div>
+            <div class="text-overlay to3cikti" id="toText" >To: </div>
+        </div>
+        <div class="paylas">
+            <!-- PDF indirme butonu -->
+            <button id="downloadImage">Download as Image</button>
+
+            <!-- Sosyal medya paylaşım butonları -->
+            <div class="share-buttons">
+                <a id="shareTwitter" href="#" target="_blank">Share on Twitter</a>
+                <a id="shareFacebook" href="#" target="_blank">Share on Facebook</a>
+            </div>
+        </div>
+
+
+        <!-- htmlcanvas.js kütüphanesini dahil et -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+
+        <script>
+            // URL'den parametreleri al ve kart üzerine yerleştir
+            window.onload = () => {
+                let text = new URLSearchParams(window.location.search);
+
+                document.getElementById("fromText").innerText = `${text.get("from")}`;
+                document.getElementById("toText").innerText = `${text.get("to")}`;
+                document.getElementById("messageText").innerText = `${text.get("message")}`;
+            }
+
+            // Image indirme
+            document.getElementById('downloadImage').addEventListener('click', () => {
+                const element = document.getElementById('cardPreview');
+
+                const font = new FontFaceObserver("Dancing Script"); // Buraya Google Font ismini gir
+
+            // Kartı canvas'a dönüştür
+            html2canvas(element,{
+                width: element.clientWidth, // Kartın genişliğini alır
+                height: element.clientHeight, // Kartın yüksekliğini alır
+                scale: 2, // Çözünürlüğü artırmak için scale kullan
+                
+                useCORS: true, // CORS problemleri yaşamamak için eklenebilir
+                allowTaint: true,
+                dpi: window.devicePixelRatio * 300, // Cihazın piksel yoğunluğunu kullan
+                logging: false, // Gereksiz logları devre dışı bırak// Çözünürlüğü artırmak için scale kullan
+            }).then(canvas => {
+            // Canvas'ı bir görüntü dosyasına çevir
+            let imgData = canvas.toDataURL('image/png');
+
+            // Görüntüyü indir
+            let link = document.createElement('a');
+            link.href = imgData;
+            link.download = 'kart.png';
+            link.click();
+            }).catch(error => {
+            console.error('Error generating image:', error);
+            });
+            }).catch(function () {
+            console.error('Font yüklenirken hata oluştu.');
+            });
+            // Sosyal medya paylaşım linklerini oluştur
+            document.getElementById('shareTwitter').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent('Check out this card: ')}${window.location.href}`;
+            document.getElementById('shareFacebook').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
+        </script>
+        <section class="footer">
+
+            <p>Made with <i class="fa fa-heart-o"></i> by Mevsim Bahar </p>
+        </section>
+        <script src="https://app.embed.im/snow.js" defer></script>
+
+        <script>
+            // Yılbaşı tarihini belirleme
+            const newYear = new Date("Jan 1, 2025 00:00:00").getTime();
+
+            // Geri sayımı güncelleyen fonksiyon
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const timeLeft = newYear - now;
+
+                // Gün, saat, dakika ve saniye hesaplama
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                // HTML elementlerini güncelleme
+                document.getElementById("days").innerHTML = days;
+                document.getElementById("hours").innerHTML = hours;
+                document.getElementById("minutes").innerHTML = minutes;
+                document.getElementById("seconds").innerHTML = seconds;
+            }
+
+            // Her saniye güncelleme
+            setInterval(updateCountdown, 1000);</script>
+
+</body>
+</html>
