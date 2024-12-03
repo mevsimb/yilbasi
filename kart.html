@@ -54,7 +54,6 @@
             <i class="fa fa-twitter"></i>
             <i class="fa fa-instagram"></i>
             <i class="fa fa-linkedin"></i>
-
         </div>
         <div id="timer">
             <div><span id="days"></span></div>
@@ -64,84 +63,73 @@
         </div>
     </section>
 
-    <body>
-        <!-- Kart önizleme alanı -->
-        <div class="card-preview" id="cardPreview">
-            <img src="projegorsel/tasari1.png" alt="Card Preview">
-            <div class="text-overlay from1" id="fromText">From: </div>
-            <div class="text-overlay to1" id="toText">To: </div>
-            <div class="text-overlay message1" id="messageText">Message: </div>
-        </div>
-        <div class="paylas">
-            <button id="createShareLink">Linki Oluştur ve Paylaş</button>
-        </div>
+    <div class="card-preview" id="cardPreview">
+        <img src="projegorsel/tasari1.png" alt="Card Preview">
+        <div class="text-overlay from1" id="fromText">From: </div>
+        <div class="text-overlay to1" id="toText">To: </div>
+        <div class="text-overlay message1" id="messageText">Message: </div>
+    </div>
+    <div class="paylas">
+        <button id="createShareLink">Linki Oluştur ve Paylaş</button>
+    </div>
 
-        <!-- htmlcanvas.js kütüphanesini dahil et -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
 
-        <script>
-            // URL'den parametreleri çekme
-            const urlParams = new URLSearchParams(window.location.search);
-            const from = urlParams.get('from') || "From"; // Varsayılan değer
-            const to = urlParams.get('to') || "To";
-            const message = urlParams.get('message') || "Message";
-            <script>
+    <script>
+        // URL'den parametreleri çekme
+        const urlParams = new URLSearchParams(window.location.search);
+        const from = urlParams.get('from') || "From"; // Varsayılan değer
+        const to = urlParams.get('to') || "To";
+        const message = urlParams.get('message') || "Message";
 
-    // Kart üzerindeki metinleri güncelleme
-    document.getElementById('fromText').innerText = decodeURIComponent(from);
-    document.getElementById('toText').innerText = decodeURIComponent(to);
-    document.getElementById('messageText').innerText = decodeURIComponent(message);
-</script>
-<script>
-            document.getElementById('createShareLink').addEventListener('click', () => {
-    // Kart üzerindeki "From", "To" ve "Message" metinlerini alıp encode ediyoruz
-    const from = encodeURIComponent(document.getElementById('fromText').innerText.replace("From: ", "").trim());
-    const to = encodeURIComponent(document.getElementById('toText').innerText.replace("To: ", "").trim());
-    const message = encodeURIComponent(document.getElementById('messageText').innerText.replace("Message: ", "").trim());
+        // Kart üzerindeki metinleri güncelleme
+        document.getElementById('fromText').innerText = decodeURIComponent(from);
+        document.getElementById('toText').innerText = decodeURIComponent(to);
+        document.getElementById('messageText').innerText = decodeURIComponent(message);
 
-    // Linki oluşturalım
-    const shareURL = `${window.location.origin}/goster.html?from=${from}&to=${to}&message=${message}`;
-});
+        // Link oluşturma ve paylaşma
+        document.getElementById('createShareLink').addEventListener('click', () => {
+            // Kart üzerindeki "From", "To" ve "Message" metinlerini alıp encode ediyoruz
+            const from = encodeURIComponent(document.getElementById('fromText').innerText.replace("From: ", "").trim());
+            const to = encodeURIComponent(document.getElementById('toText').innerText.replace("To: ", "").trim());
+            const message = encodeURIComponent(document.getElementById('messageText').innerText.replace("Message: ", "").trim());
 
-        
+            // Linki oluşturalım
+            const shareURL = `${window.location.origin}/goster.html?from=${from}&to=${to}&message=${message}`;
+            console.log(shareURL); // Linki konsola yazdırma (isteğe bağlı)
+        });
+    </script>
 
+    <section class="footer">
+        <p>Made with <i class="fa fa-heart-o"></i> by Mevsim Bahar </p>
+    </section>
 
+    <script>
+        // Yılbaşı tarihini belirleme
+        const newYear = new Date("Jan 1, 2025 00:00:00").getTime();
 
+        // Geri sayımı güncelleyen fonksiyon
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = newYear - now;
 
-        </script>
-        <section class="footer">
+            // Gün, saat, dakika ve saniye hesaplama
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-            <p>Made with <i class="fa fa-heart-o"></i> by Mevsim Bahar </p>
-        </section>
-        <script src="https://app.embed.im/snow.js" defer></script>
+            // HTML elementlerini güncelleme
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+        }
 
-        <script>
-            // Yılbaşı tarihini belirleme
-            const newYear = new Date("Jan 1, 2025 00:00:00").getTime();
-
-            // Geri sayımı güncelleyen fonksiyon
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const timeLeft = newYear - now;
-
-                // Gün, saat, dakika ve saniye hesaplama
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-                // HTML elementlerini güncelleme
-                document.getElementById("days").innerHTML = days;
-                document.getElementById("hours").innerHTML = hours;
-                document.getElementById("minutes").innerHTML = minutes;
-                document.getElementById("seconds").innerHTML = seconds;
-            }
-
-            // Her saniye güncelleme
-            setInterval(updateCountdown, 1000);</script>
-
-    </body>
+        // Her saniye güncelleme
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
 
 </html>
