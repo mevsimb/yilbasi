@@ -53,8 +53,8 @@
     color: #ffcc00;
     text-align: center;
     opacity: 0;
-    z-index: 9999;
-  transition: opacity 1s ease-out;  /* Fade-out efekti ekledik */
+    z-index: 10;
+  transition: opacity 1s ;  /* Fade-out efekti ekledik */
 }
 
 .hidden {
@@ -94,36 +94,39 @@
     <script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js"></script>
 
     <script>
-        window.onload = () => {
+       window.onload = () => {
             const params = new URLSearchParams(window.location.search);
             document.getElementById("fromText").innerText = params.get("from");
             document.getElementById("toText").innerText = params.get("to");
             document.getElementById("messageText").innerText = params.get("message");
 
-           // Kutlama animasyonu
-const animationDiv = document.getElementById('celebration-animation');
-const celebrationText = document.getElementById('celebration-text');
+            // Kutlama animasyonu
+            const animationDiv = document.getElementById('celebration-animation');
+            const celebrationText = document.getElementById('celebration-text');
 
-if (animationDiv && celebrationText) {
-    // Yıldız animasyonu
-    party.sparkles(animationDiv, {
-        count: 100,
-        spread: 70,
-        size: 1.5,
-        lifetime: 2,
-    });
+            if (animationDiv && celebrationText) {
+                // Yıldız animasyonu
+                party.sparkles(animationDiv, {
+                    count: 100,
+                    spread: 70,
+                    size: 1.5,
+                    lifetime: 2,
+                });
 
-    // "Mutlu Yıllar!" yazısının kaybolmasını sağlamak için
-    setTimeout(() => {
-        celebrationText.style.display = 'none';  // Yazıyı gizle
-    }, 3000);  // 3 saniye sonra yazıyı kaybet
-} else {
-    console.error('Animation div veya text bulunamadı.');
-}
-        // "Sen de bir kart hazırla" butonu
-        document.getElementById("createOwnCard").onclick = () => {
-            window.location.href = "kartsecim.html"; // Kart hazırlama sayfasına yönlendirme
+                // "Mutlu Yıllar!" yazısının kaybolmasını sağlamak için
+                setTimeout(() => {
+                    celebrationText.style.opacity = '0';  // Yazıyı kaybettir
+                }, 3000);  // 3 saniye sonra yazıyı kaybet
+            } else {
+                console.error('Animation div veya text bulunamadı.');
+            }
+
+            // "Sen de bir kart hazırla" butonu
+            document.getElementById("createOwnCard").onclick = () => {
+                window.location.href = "kartsecim.html"; // Kart hazırlama sayfasına yönlendirme
+            };
         };
+    </script>
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
