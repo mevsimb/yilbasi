@@ -39,23 +39,7 @@
     }
 /* Kart Alanı */
 #cardPreview {
-    position: relative;
     top: 100px;
-    width: 300px; /* Kartın genişliğini sabit tutun */
-    height: 400px; /* Kartın yüksekliğini sabit tutun */
-    margin: 0 auto; /* Kartı ortalayın */
-    background-color: white; /* Arka plan rengi */
-    border: 2px solid #ccc; /* Çerçeve */
-    border-radius: 15px; /* Yuvarlatılmış köşeler */
-    overflow: hidden; /* Taşmaları engelleyin */
-}
-
-/* Kartın içindeki yazılar */
-#cardPreview .text {
-    position: absolute;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    word-wrap: break-word; /* Uzun metinleri kır */
 }
 
 /* Link Alanı */
@@ -167,18 +151,16 @@ document.getElementById('createShareLink').addEventListener('click', () => {
     const shareURL = `https://mevsimb.github.io/yilbasi/goster.html?from=${from}&to=${to}&message=${message}`;
     console.log("Generated URL:", shareURL);
 
-    // Linki kullanıcıya gösterelim
-    const linkContainer = document.createElement('div');
-   linkContainer.className = "share-container"; // Stil için class ekleniyor
+  // Linki kullanıcıya gösterelim (sadece bir kez çalışacak)
+    const linkContainer = document.getElementById('linkContainer');
     linkContainer.innerHTML = `
-       
         <div class="rounded-box">${shareURL}</div>
-        <button  class="copy-button" onclick="copyToClipboard('${shareURL}')">Copy Link</button>
+        <button class="copy-button" onclick="copyToClipboard('${shareURL}')">Link Created - Copy Link</button>
     `;
-    document.body.appendChild(linkContainer); // Yeni oluşturulan bağlantıyı ekliyoruz
-      const createShareLinkButton = document.getElementById('createShareLink');
-    createShareLinkButton.disabled = true; // Butonu devre dışı yap
-    createShareLinkButton.innerText = "Link Created"; // Buton yazısını güncelle
+
+    // Butonu devre dışı yap ve yazısını değiştir
+    this.disabled = true;
+    this.innerText = "Link Created";  // Buton yazısını değiştir
 });
 
 // Linki kopyalama fonksiyonu
