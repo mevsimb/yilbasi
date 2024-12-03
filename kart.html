@@ -44,7 +44,7 @@
 
 /* Link Alanı */
 .share-container {
-    margin-top: 70px;
+    margin-top: 90px;
     text-align: center;
     font-family: Arial, sans-serif;
 }
@@ -59,6 +59,7 @@
     color: #333;
     margin-bottom: 10px;
     word-break: break-word;
+    margin-top:20px;
 }
 
 /* Copy Link Butonu */
@@ -142,9 +143,8 @@ document.getElementById('messageText').innerText = decodeURIComponent(message);
 
 // Link oluşturma ve paylaşma
 document.getElementById('createShareLink').addEventListener('click', function() {
-    // Butonu devre dışı yap ve yazısını değiştir
-    this.disabled = true;
-    this.innerText = "Link Oluşturuldu";  // Buton yazısını değiştir
+    // Butonu gizle
+    this.style.display = 'none';
 
     // Kart üzerindeki metinleri alıp encode ediyoruz
     const from = encodeURIComponent(document.getElementById('fromText').innerText.replace("From: ", "").trim());
@@ -159,7 +159,7 @@ document.getElementById('createShareLink').addEventListener('click', function() 
     const linkContainer = document.getElementById('linkContainer');
     linkContainer.innerHTML = `
         <div class="rounded-box">${shareURL}</div>
-        <button class="copy-button" onclick="copyToClipboard('${shareURL}')">Link Oluşturuldu - Linki Kopyala</button>
+        <button class="copy-button" onclick="copyToClipboard('${shareURL}')"> Linki Kopyala</button>
     `;
 });
 
