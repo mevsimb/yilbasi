@@ -39,11 +39,11 @@
     }
 
     #cardPreview {
-        top: 150px;
+        top: 100px;
         position: relative;
     }
     .share-container {
-    margin-top: 50px;
+    margin-top: 70px;
     text-align: center;
     font-family: Arial, sans-serif;
 }
@@ -137,6 +137,9 @@ document.getElementById('createShareLink').addEventListener('click', () => {
         <button  class="copy-button" onclick="copyToClipboard('${shareURL}')">Copy Link</button>
     `;
     document.body.appendChild(linkContainer); // Yeni oluşturulan bağlantıyı ekliyoruz
+      const createShareLinkButton = document.getElementById('createShareLink');
+    createShareLinkButton.disabled = true; // Butonu devre dışı yap
+    createShareLinkButton.innerText = "Link Created"; // Buton yazısını güncelle
 });
 
 // Linki kopyalama fonksiyonu
