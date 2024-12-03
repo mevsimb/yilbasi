@@ -141,7 +141,11 @@ document.getElementById('toText').innerText = decodeURIComponent(to);
 document.getElementById('messageText').innerText = decodeURIComponent(message);
 
 // Link oluşturma ve paylaşma
-document.getElementById('createShareLink').addEventListener('click', () => {
+document.getElementById('createShareLink').addEventListener('click', function() {
+    // Butonu devre dışı yap ve yazısını değiştir
+    this.disabled = true;
+    this.innerText = "Link Oluşturuldu";  // Buton yazısını değiştir
+
     // Kart üzerindeki metinleri alıp encode ediyoruz
     const from = encodeURIComponent(document.getElementById('fromText').innerText.replace("From: ", "").trim());
     const to = encodeURIComponent(document.getElementById('toText').innerText.replace("To: ", "").trim());
@@ -151,16 +155,12 @@ document.getElementById('createShareLink').addEventListener('click', () => {
     const shareURL = `https://mevsimb.github.io/yilbasi/goster.html?from=${from}&to=${to}&message=${message}`;
     console.log("Generated URL:", shareURL);
 
-  // Linki kullanıcıya gösterelim (sadece bir kez çalışacak)
+    // Linki kullanıcıya gösterelim (sadece bir kez çalışacak)
     const linkContainer = document.getElementById('linkContainer');
     linkContainer.innerHTML = `
         <div class="rounded-box">${shareURL}</div>
-        <button class="copy-button" onclick="copyToClipboard('${shareURL}')">Link Created - Copy Link</button>
+        <button class="copy-button" onclick="copyToClipboard('${shareURL}')">Link Oluşturuldu - Linki Kopyala</button>
     `;
-
-    // Butonu devre dışı yap ve yazısını değiştir
-    this.disabled = true;
-    this.innerText = "Link Created";  // Buton yazısını değiştir
 });
 
 // Linki kopyalama fonksiyonu
@@ -171,8 +171,9 @@ function copyToClipboard(text) {
     tempInput.select();
     document.execCommand("copy");
     document.body.removeChild(tempInput);
-    alert("Link copied to clipboard!");
+    alert("Link kopyalandı!");
 }
+
     </script>
 
     <section class="footer">
