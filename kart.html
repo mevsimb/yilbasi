@@ -89,22 +89,40 @@
         document.getElementById('messageText').innerText = decodeURIComponent(message);
 
         // Link oluşturma ve paylaşma
-        document.getElementById('createShareLink').addEventListener('click', () => {
-            // Kart üzerindeki "From", "To" ve "Message" metinlerini alıp encode ediyoruz
-            const from = encodeURIComponent(document.getElementById('fromText').innerText.replace("From: ", "").trim());
-            const to = encodeURIComponent(document.getElementById('toText').innerText.replace("To: ", "").trim());
-            const message = encodeURIComponent(document.getElementById('messageText').innerText.replace("Message: ", "").trim());
+    document.getElementById('createShareLink').addEventListener('click', () => {
+    // Kart üzerindeki metinleri alıp encode ediyoruz
+    const from = encodeURIComponent(document.getElementById('fromText').innerText.replace("From: ", "").trim());
+    const to = encodeURIComponent(document.getElementById('toText').innerText.replace("To: ", "").trim());
+    const message = encodeURIComponent(document.getElementById('messageText').innerText.replace("Message: ", "").trim());
 
-            // Linki oluşturalım
-            const shareURL = `${window.location.origin}/goster.html?from=${from}&to=${to}&message=${message}`;
-            console.log(shareURL); // Linki konsola yazdırma (isteğe bağlı)
-        });
+    // Linki oluşturalım
+    const shareURL = `${window.location.origin}/goster.html?from=${from}&to=${to}&message=${message}`;
+    
+    // Linki kullanıcıya gösterelim
+    const linkContainer = document.createElement('div');
+    linkContainer.innerHTML = `
+        <p>Your shareable link: <a href="${shareURL}" target="_blank">${shareURL}</a></p>
+        <button onclick="copyToClipboard('${shareURL}')">Copy Link</button>
+    `;
+    document.body.appendChild(linkContainer); // Yeni oluşturulan bağlantıyı ekliyoruz
+});
+
+// Linki kopyalama fonksiyonu
+function copyToClipboard(text) {
+    const tempInput = document.createElement("input");
+    document.body.appendChild(tempInput);
+    tempInput.value = text;
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+    alert("Link copied to clipboard!");
+}
     </script>
 
     <section class="footer">
         <p>Made with <i class="fa fa-heart-o"></i> by Mevsim Bahar </p>
     </section>
-
+ <script src="https://app.embed.im/snow.js" defer></script>
     <script>
         // Yılbaşı tarihini belirleme
         const newYear = new Date("Jan 1, 2025 00:00:00").getTime();
